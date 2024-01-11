@@ -3,7 +3,6 @@
 
 import uuid
 from datetime import datetime
-from models import storage
 
 
 class BaseModel:
@@ -18,6 +17,7 @@ class BaseModel:
             - **kwargs: dict of key-values arguments
         """
 
+        from models import storage
         if kwargs is not None and kwargs != {}:
             for key in kwargs:
                 if key == "created_at":
@@ -43,6 +43,7 @@ class BaseModel:
     def save(self):
         """updates the public instance attribute updated_at"""
 
+        from models import storage
         self.updated_at = datetime.now()
         storage.save()
 
