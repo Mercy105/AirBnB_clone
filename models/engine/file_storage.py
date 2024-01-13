@@ -26,7 +26,7 @@ class FileStorage:
         '''Fills in __objects with key <obj class name>.id
         The values will be corresponding dict representations
         '''
-        key = obj.__class__.name__ + '.' + obj.id
+        key = obj.__class__.__name__ + '.' + obj.id
         FileStorage.__objects[key] = obj
 
     def save(self):
