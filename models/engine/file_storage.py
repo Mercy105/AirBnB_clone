@@ -3,8 +3,12 @@
 '''
 import json
 from models.base_model import BaseModel
-
-classes = {"BaseModel": BaseModel}
+from models.user import User
+from models.place import Place
+from models.state import State
+from models.city import City
+from models.amenity import Amenity
+from models.review import Review
 
 
 class FileStorage:
@@ -16,6 +20,11 @@ class FileStorage:
     '''
     __file_path = 'file.json'
     __objects = {}
+    classes = {
+        "BaseModel": BaseModel, "User": User, "State": State,
+        "City": City, "Amenity": Amenity, "Place": Place,
+        "Review": Review
+    }
 
     def all(self):
         '''Return a dictionary of all objects currently stored
@@ -47,7 +56,7 @@ class FileStorage:
             with open(FileStorage.__file_path, 'r') as g:
                 objs_dict = json.load(g)
                 for k in objs_dict:
-                    self.__objects[k] =
-                    classes[objs_dict[k]['__class__']](**objs_dict[k])
+                    self.__objects[k] =\
+                      self.classes[objs_dict[k]['__class__']](**objs_dict[k])
         except FileNotFoundError:
             pass
